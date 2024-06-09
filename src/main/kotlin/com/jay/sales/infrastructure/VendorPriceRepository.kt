@@ -1,6 +1,5 @@
 package com.jay.sales.infrastructure
 
-import com.jay.sales.domain.Product
 import com.jay.sales.domain.VendorPrice
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable

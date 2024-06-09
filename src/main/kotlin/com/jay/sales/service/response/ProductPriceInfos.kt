@@ -4,7 +4,10 @@ import java.io.Serializable
 
 data class ProductPriceInfos(
     val productPriceInfoList: List<ProductPrice>
-) : Serializable
+) : Serializable {
+
+    fun hasSize(): Boolean = productPriceInfoList.isNotEmpty()
+}
 
 data class ProductPrice(
     val vendor: String,

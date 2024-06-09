@@ -2,6 +2,8 @@ server:
   port: 28080
 
 spring:
+  profiles:
+    active: global-cache-strategy
   redis:
     host: localhost
     port: 63790

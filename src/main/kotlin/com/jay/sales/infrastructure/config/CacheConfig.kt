@@ -25,7 +25,7 @@ class CacheConfig {
     @Bean
     @Profile("local-cache-strategy")
     fun localCacheManager(): CacheManager {
-        return CaffeineCacheManager("min-price-vendors").apply {
+        return CaffeineCacheManager("min-price-products").apply {
             this.setCaffeine(caffeineCache())
         }
     }
@@ -38,7 +38,7 @@ class CacheConfig {
             .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(StringRedisSerializer()))
             .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(GenericJackson2JsonRedisSerializer()))
 
-        return RedisCacheManager.builder(redisConnectionFactory).initialCacheNames(setOf("min-price-vendors"))
+        return RedisCacheManager.builder(redisConnectionFactory).initialCacheNames(setOf("min-price-products"))
             .cacheDefaults(redisCacheConfig)
             .build()
     }

@@ -29,7 +29,7 @@ class ProductPriceServiceTest {
         val productAddCommand = ProductAddCommand(productId, "TestProduct")
         productInfoService.addProduct(productAddCommand)
 
-        val vendorPriceCommand1 = VendorPriceAddCommand(productId, "TestVendor1", 10000L)
+        val vendorPriceCommand1 = VendorPriceAddCommand(productId, "TestVendor1", 10000000L)
         val vendorPriceCommand2 = VendorPriceAddCommand(productId, "TestVendor2", 100000L)
 
         vendorPriceService.add(vendorPriceCommand1)
@@ -37,11 +37,11 @@ class ProductPriceServiceTest {
     }
 
     @Test
-    fun findLowestPriceVendor() {
-        val findLowestPriceVendorNames =
-            productPriceService.findLowestPriceVendor(TopNLowPriceVendorsQuery(productId)).vendorNames
+    fun findTopNLowPriceProducts() {
+        val topNLowPriceProducts =
+            productPriceService.findTopNLowPriceProducts(TopNLowPriceVendorsQuery(productId, 1)).productPriceInfoList
 
-        Assertions.assertThat(findLowestPriceVendorNames).size().isEqualTo(1)
-        Assertions.assertThat(findLowestPriceVendorNames).contains("TestVendor1")
+        Assertions.assertThat(topNLowPriceProducts).size().isEqualTo(1)
+        Assertions.assertThat(topNLowPriceProducts.get(0).price).isEqualTo(100000L)
     }
 }

@@ -13,7 +13,7 @@ class ProductPriceService(
 ) {
 
     @Transactional(readOnly = true)
-    @Cacheable("lowestPriceVendors")
+    @Cacheable("min-price-vendors")
     fun findLowestPriceVendor(query: LowestPriceProductQuery): ProductLowestPriceVendors {
         val lowestPriceVendorName = productRepository.findLowestPriceProductsWithProductId(query.productId)
             .flatMap { it.vendorPrice }

@@ -2,9 +2,8 @@ package com.jay.sales.service
 
 import com.jay.sales.service.command.ProductAddCommand
 import com.jay.sales.service.command.VendorPriceAddCommand
-import com.jay.sales.service.query.LowestPriceProductQuery
+import com.jay.sales.service.query.TopNLowPriceVendorsQuery
 import org.assertj.core.api.Assertions
-import org.junit.jupiter.api.Assertions.*
 
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -40,7 +39,7 @@ class ProductPriceServiceTest {
     @Test
     fun findLowestPriceVendor() {
         val findLowestPriceVendorNames =
-            productPriceService.findLowestPriceVendor(LowestPriceProductQuery(productId)).vendorNames
+            productPriceService.findLowestPriceVendor(TopNLowPriceVendorsQuery(productId)).vendorNames
 
         Assertions.assertThat(findLowestPriceVendorNames).size().isEqualTo(1)
         Assertions.assertThat(findLowestPriceVendorNames).contains("TestVendor1")

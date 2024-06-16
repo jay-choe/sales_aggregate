@@ -20,15 +20,9 @@ class VendorPriceRedisSupport(
 
     fun renewProductVendorPrice(command: VendorPriceAddCommand) {
         val key = PRODUCT_PRICE_KEY_FORMAT.format(command.productId)
-
-        redisTemplate.execute { connection ->
-            connection.openPipeline()
-            val zSetOperation = redisTemplate.opsForZSet()
-
-            zSetOperation.add(key, command.vendorName, command.price.toDouble())
-            connection.keyCommands().expire(key.toByteArray(), ofDays(1).toSeconds())
-            connection.closePipeline()
-        }
+        val zSetOperation = redisTemplate.opsForZSet()
+        zSetOperation.add(key, command.vendorName, command.price.toDouble())
+        // TODO: TTL 대신 update시 N개만을 보장하도록한다.
     }
 
     fun getTopNLowestPrice(query: TopNLowPriceVendorsQuery): ProductPriceInfos {

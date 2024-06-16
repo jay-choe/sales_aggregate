@@ -29,7 +29,7 @@ class ProductPriceService(
 
         // save cache
         topNLowestPriceProducts.map { VendorPriceAddCommand(it.product.id, it.vendorName, it.price) }
-            .forEach { cacheSupport.saveProductVendorPrice(it) }
+            .forEach { cacheSupport.renewProductVendorPrice(it) }
 
         return ProductPriceInfos(topNLowestPriceProducts.map { ProductPrice(it.vendorName, it.price) })
     }
